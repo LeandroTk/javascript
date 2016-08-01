@@ -1,28 +1,50 @@
-var RadioButtonSelectSynchronizer = function(select) {
-	this.$radioButtons = $('[data-codus-radio]');
-	this.$selectOtions = $('[data-codus-select] option');
+var OccupationAreaProtectionLevelSynchronizer = function() {
+  this.$occupationAreas = $('[data-occupation-area]');
+  this.$protectionLevels = $('[data-protection-level] option');
+  this.$checkedOccupationArea = this._getCheckedOccupationArea();
+  this.bindChangeOnOccupationArea();
 }
 
-RadioButtonSelectSynchronizer.prototype.sync = function() {
-	// checked radio button --> enable / disable options from select
+OccupationAreaProtectionLevelSynchronizer.prototype.bindChangeOnOccupationArea = function() {
+  var self = this;
+
+  this.$occupationAreas.change(function() {
+    self.$checkedOccupationArea = self._getCheckedOccupationArea();
+    self.sync();
+  });
 }
 
-RadioButtonSelectSynchronizer.prototype.bindElements = function() {
-	var self = this;
+OccupationAreaProtectionLevelSynchronizer.prototype.sync = function() {
+  if (this.$checkedOccupationArea.value == 'attendance') {
+    this.$protectionLevels.each(function() {
+      if (this.value == 'first') {
+        $(this).prop('disabled', false);
+        $(this).prop('selected', true);
+      } else {
+        $(this).prop('disabled', true);
+      }
+    })
+  } else if (this.$checkedOccupationArea.value == 'assistance') {
+    this.$protectionLevels.each(function() {
+      if (this.value == 'second') {
+        $(this).prop('disabled', false);
+        $(this).prop('selected', true);
+      } else {
+        $(this).prop('disabled', true);
+      }
+    })
+  } else if (this.$checkedOccupationArea.value == 'attendance_assistance') {
+    this.$protectionLevels.each(function() {
+      if (this.value == 'third') {
+        $(this).prop('disabled', false);
+        $(this).prop('selected', true);
+      } else {
+        $(this).prop('disabled', true);
+      }
+    })
+  }
+}
 
-	this.$radioButton.change(function() {
-		if (this.value == 'first') {
-			self.$selectOptions.each(function() {
-				// enable / disable
-			});
-		} else if (this.value == 'second') {
-			self.$selectOptions.each(function() {
-				// enable / disable
-			});
-		} else if (this.value == 'third') {
-			self.$selectOptions.each(function() {
-				// enable / disable
-			});
-		}
-	});
+OccupationAreaProtectionLevelSynchronizer.prototype._getCheckedOccupationArea = function() {
+  return $('[data-occupation-area]:checked')[0];
 }
