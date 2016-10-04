@@ -4,11 +4,19 @@ import SearchProducts from './SearchableProducts/SearchProducts';
 import ProductsList from './SearchableProducts/ProductsList';
 
 export default class SearchableProducts extends Component {
+  constructor() {
+  	super();
+  	this.state = { filterText: '' };
+  }
+
   render() {
     return (
       <div className="SearchableProducts">
-        <SearchProducts />
-        <ProductsList products={this.props.products} />
+        <SearchProducts filterText={this.state.filterText} />
+        <ProductsList 
+        	products={this.props.products}
+        	filterText={this.state.filterText}
+        />
       </div>
     );
   }  

@@ -21,12 +21,15 @@ export default class ProductsList extends Component {
 		});
 
 		var productsTables = [];
+		var self = this;
 
 		Object.keys(result).forEach(function(category) {
 		  productsTables.push(<ProductCategoryRow category={category} key={category} />);
-		  
+
 		  result[category].forEach(function(product) {
-		  	productsTables.push(<ProductRow product={product} key={product.name} />);
+		  	if (product.name.indexOf(self.props.filterText) !== -1) {
+		  		productsTables.push(<ProductRow product={product} key={product.name} />);
+		  	}
 		  });
 		});
 
