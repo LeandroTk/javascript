@@ -8,7 +8,7 @@ export default class SearchableProducts extends Component {
     return (
       <div className="SearchableProducts">
         <SearchProducts />
-        <ProductsList />
+        <ProductsList products={this.props.products} />
       </div>
     );
   }  
