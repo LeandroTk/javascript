@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 export default class SearchProducts extends Component {
 	constructor(props) {
 		super(props);
-		this.updateInputValue = this.updateInputValue.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
-	updateInputValue(e) {
-		this.setState({ filterText: e.target.value });
+	handleChange() {
+		this.props.onChangeInput(this.refs.filterText.value);
 	}
 
 	render() {
@@ -15,9 +15,9 @@ export default class SearchProducts extends Component {
 			<form>
 				<input 
 					type="text" 
-					placeholder="Enter product" 
-					defaultValue={this.props.filterText} 
-					onChange={this.updateInputValue}
+					placeholder="Enter a product name"
+					ref="filterText"  
+					onChange={this.handleChange}
 				/>
 			</form>
 		);

@@ -5,17 +5,25 @@ import ProductsList from './SearchableProducts/ProductsList';
 
 export default class SearchableProducts extends Component {
   constructor() {
-  	super();
-  	this.state = { filterText: '' };
+    super();
+    this.state = { filterText: '' };
+    this.handleUserInput = this.handleUserInput.bind(this);
+  }
+
+  handleUserInput(filterText) {
+    this.setState({ filterText: filterText });
   }
 
   render() {
     return (
       <div className="SearchableProducts">
-        <SearchProducts filterText={this.state.filterText} />
+        <SearchProducts 
+          filterText={this.state.filterText}
+          onChangeInput={this.handleUserInput}
+        />
         <ProductsList 
-        	products={this.props.products}
-        	filterText={this.state.filterText}
+          products={this.props.products}
+          filterText={this.state.filterText}
         />
       </div>
     );

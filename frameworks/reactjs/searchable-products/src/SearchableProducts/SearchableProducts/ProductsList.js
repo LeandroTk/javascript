@@ -20,12 +20,13 @@ export default class ProductsList extends Component {
 		  return product.category;
 		});
 
-		let productsTables = [],
-				filteredText = this.props.filterText.toUpperCase();
+		var productsTables = [];
 
 		Object.keys(result).forEach((category) => {
-		  let filteredProducts = result[category].filter((product) => {
-		  	return product.name.toUpperCase().indexOf(filteredText) > -1;
+		  let filteredProducts = result[category].map((product) => {
+		  	if (product.name.toUpperCase().indexOf(this.props.filterText.toUpperCase()) > -1) {
+		  		return product;
+		  	}
 		  });
 
 		  if (filteredProducts.length > 0) {
