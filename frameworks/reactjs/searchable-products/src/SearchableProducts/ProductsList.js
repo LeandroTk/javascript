@@ -4,7 +4,7 @@ import ProductRow from './ProductRow';
 
 export default class ProductsList extends Component {
 	_groupBy(products , iterator) {
-	  var groups = {};
+	  let groups = {};
 
 	  products.forEach(function(product) {
 	    const category = JSON.stringify(iterator(product));
@@ -16,7 +16,7 @@ export default class ProductsList extends Component {
 	}
 
 	render() {		
-		var result = this._groupBy(this.props.products, function(product) {
+		let result = this._groupBy(this.props.products, function(product) {
 		  return product.category;
 		});
 

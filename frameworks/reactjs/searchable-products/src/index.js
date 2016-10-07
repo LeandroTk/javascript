@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import SearchableProducts from './SearchableProducts';
 import { products } from './data/products'
 import './index.css';
 
-ReactDOM.render(
+render(
   <SearchableProducts products={products} />,
   document.getElementById('root')
 );
