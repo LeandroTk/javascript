@@ -7,11 +7,12 @@ var animals = [
   { name: 'Jimmy', species: 'fish' }
 ]
 
-function getAnimals(value) {
+// Using filter function
+function isDog(value) {
   return value.species === 'dog';
 }
 
-var filtered = animals.filter(getAnimals);
+var filtered = animals.filter(isDog);
 console.log(filtered);﻿
 
 // With for loop
