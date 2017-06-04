@@ -1,4 +1,4 @@
-// functions are value
+// functions are values
 
 function triple(x) {
   return x * 3;
