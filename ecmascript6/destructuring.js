@@ -1,42 +1,28 @@
-// objects
+// Destructure the `{ type, data }` and set the default value to an empty object in case of no parameter
 
-var foo = {
-  bar: 1,
-  baz: 2
+const reducer = (state, { type, data } = {}) => {
+  switch (type) {
+    case "ADD":
+      return state + data;
+    default:
+      return state;
+  }
 };
 
-var { bar, baz } = foo;
+reducer(1, { type: "ADD", data: 2 }); // 3
+reducer(1); // 1
 
-// arrays
+// Name the parameter with `action` and then destructure the action
 
-var nums = [1, 2, 3];
-var [ num1, num2, num3 ] = nums;
+const reducer = (state, action = {}) => {
+  const { type, data } = action;
+  switch (type) {
+    case "ADD":
+      return state + data;
+    default:
+      return state;
+  }
+};
 
-// promises: destructuring results
-
-Promise.all([promise1, promise2]).then(function(results) {
-  var [ promise1, promise2 ] = results;
-});
-
-// promises: destructuring parameters
-
-Promise.all([promise1, promise2]).then(function([promise1, promise2]) {
-
-});
-
-// parameters on functions
-
-var weight = 50,
-    height = 170,
-    max    = 25;
-
-function calculateBmi({ weight, height, max = 25, callback }) {
-  var bmi = weight / Math.pow(height, 2);
-
-  if (bmi > max) console.log('You are overweight');
-
-  if (callback) callback(bmi);
-}
-
-calculateBmi({ weight, height, max });
-calculateBmi({ weight, height, callback: function() {} });
+reducer(1, { type: "ADD", data: 2 }); // 3
+reducer(1); // 1
