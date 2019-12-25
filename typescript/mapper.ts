@@ -20,3 +20,13 @@ const fromAPI = (person: PersonAPI): Person => ({
   email: person.email,
   active: person.ativo
 });
+
+const payloadAPI = {
+  id: 1,
+  nome: 'TK',
+  email: 'tk@mail.com',
+  ativo: true
+};
+
+const person = fromAPI(payloadAPI);
+console.log(person);
