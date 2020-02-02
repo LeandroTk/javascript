@@ -12,15 +12,31 @@ anyValue = Math.random;      // OK
 anyValue = null;             // OK
 anyValue = undefined;        // OK
 
-anyValue.foo.bar;  // OK
-anyValue.trim();   // OK
-anyValue();        // OK
-new anyValue();    // OK
-anyValue[0][1];    // OK
+// object with any type
+anyValue = { foo: { bar: 1 } };
+anyValue.foo.bar; // OK
+
+// string with any type
+anyValue = ' string to be trimmed ';
+anyValue.trim(); // OK
+
+// function with any type
+anyValue = () => console.log('function called');
+anyValue(); // OK
+
+// class with any type
+anyValue = String;
+new anyValue(); // OK
+
+// matrix with any type
+anyValue = [[0], [1]];
+anyValue[0][1]; // OK
+
 
 // Unknown
 let unknownValue: unknown;
 
+// Unknown type cannot be assigned to other types unless the `any` type
 let unknownValue1: unknown = unknownValue;   // OK
 let unknownValue2: any = unknownValue;       // OK
 let unknownValue3: boolean = unknownValue;   // Error
